@@ -74,13 +74,13 @@ class Counter : AppCompatActivity() {
 
         btnEquipaA.setOnClickListener {
             pontosEquipaA += pontosJogadaAtual
-            textViewEquipaA.text = "Equipe A: $pontosEquipaA"
+            textViewEquipaA.text = "$nomeEquipeA: $pontosEquipaA"
             resetarJogada()
         }
 
         btnEquipaB.setOnClickListener {
             pontosEquipaB += pontosJogadaAtual
-            textViewEquipaB.text = "Equipe B: $pontosEquipaB"
+            textViewEquipaB.text = "$nomeEquipeB: $pontosEquipaB"
             resetarJogada()
         }
 
@@ -88,15 +88,15 @@ class Counter : AppCompatActivity() {
             val intent = Intent(this, History::class.java)
             val vencedor: String
             if (pontosEquipaA > pontosEquipaB) {
-                vencedor = "Equipe A"
+                vencedor = "Equipa A"
             } else if (pontosEquipaB > pontosEquipaA) {
-                vencedor = "Equipe B"
+                vencedor = "Equipa B"
             } else {
                 vencedor = "Empate"
             }
 
-            intent.putExtra("pontosEquipeA", pontosEquipaA)
-            intent.putExtra("pontosEquipeB", pontosEquipaB)
+            intent.putExtra("pontosEquipaA", pontosEquipaA)
+            intent.putExtra("pontosEquipaB", pontosEquipaB)
             intent.putExtra("vencedor", vencedor)
             startActivity(intent)
         }
