@@ -85,7 +85,6 @@ class Counter : AppCompatActivity() {
         }
 
         btnTerminar.setOnClickListener {
-            val intent = Intent(this, History::class.java)
             val vencedor: String
             if (pontosEquipaA > pontosEquipaB) {
                 vencedor = "Equipa A"
@@ -94,11 +93,6 @@ class Counter : AppCompatActivity() {
             } else {
                 vencedor = "Empate"
             }
-
-            intent.putExtra("pontosEquipaA", pontosEquipaA)
-            intent.putExtra("pontosEquipaB", pontosEquipaB)
-            intent.putExtra("vencedor", vencedor)
-            startActivity(intent)
         }
     }
 
