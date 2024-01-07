@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1007567105603",
+    "project_id": "suecacounter",
+    "storage_bucket": "suecacounter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1007567105603:android:77dcb5e147163a65fd2ef6",
+        "android_client_info": {
+          "package_name": "com.example.suecacounter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMhaUnIXKL2lgPmEXXbuJZTz-i1uEadbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
