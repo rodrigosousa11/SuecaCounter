@@ -3,10 +3,14 @@ package com.example.suecacounter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class Counter : AppCompatActivity() {
     private lateinit var btnEquipaA: Button
@@ -27,10 +31,19 @@ class Counter : AppCompatActivity() {
     private lateinit var imagemValete: ImageView
     private lateinit var imagemDama: ImageView
 
+    private lateinit var ref: DatabaseReference
+    private lateinit var userId: String
+
     @SuppressLint("SetTextI18n", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_counter)
+
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val currentUser = firebaseAuth.currentUser
+        userId = currentUser?.uid ?: ""
+
+        ref = FirebaseDatabase.getInstance().reference.child("users").child(userId).child("jogos")
 
         textViewEquipaA = findViewById(R.id.textViewEquipaA)
         textViewEquipaB = findViewById(R.id.textViewEquipaB)
@@ -44,13 +57,13 @@ class Counter : AppCompatActivity() {
         imagemValete = findViewById(R.id.imagemValete)
         imagemDama = findViewById(R.id.imagemDama)
 
-        val nomeEquipeA = intent.getStringExtra("nomeEquipeA")
-        val nomeEquipeB = intent.getStringExtra("nomeEquipeB")
+        val nomeEquipaA = intent.getStringExtra("nomeEquipaA") ?: ""
+        val nomeEquipaB = intent.getStringExtra("nomeEquipaB") ?: ""
 
         val textViewNomeEquipeA = findViewById<TextView>(R.id.textViewEquipaA)
         val textViewNomeEquipeB = findViewById<TextView>(R.id.textViewEquipaB)
-        textViewNomeEquipeA.text = "$nomeEquipeA: $pontosEquipaA"
-        textViewNomeEquipeB.text = "$nomeEquipeB: $pontosEquipaB"
+        textViewNomeEquipeA.text = "$nomeEquipaA: $pontosEquipaA"
+        textViewNomeEquipeB.text = "$nomeEquipaB: $pontosEquipaB"
 
         val cartas = listOf(11, 10, 4, 3, 2)
 
@@ -74,25 +87,26 @@ class Counter : AppCompatActivity() {
 
         btnEquipaA.setOnClickListener {
             pontosEquipaA += pontosJogadaAtual
-            textViewEquipaA.text = "$nomeEquipeA: $pontosEquipaA"
+            textViewEquipaA.text = "$nomeEquipaA: $pontosEquipaA"
             resetarJogada()
         }
 
         btnEquipaB.setOnClickListener {
             pontosEquipaB += pontosJogadaAtual
-            textViewEquipaB.text = "$nomeEquipeB: $pontosEquipaB"
+            textViewEquipaB.text = "$nomeEquipaB: $pontosEquipaB"
             resetarJogada()
         }
 
         btnTerminar.setOnClickListener {
             val vencedor: String
             if (pontosEquipaA > pontosEquipaB) {
-                vencedor = "Equipa A"
+                vencedor = "$nomeEquipaA"
             } else if (pontosEquipaB > pontosEquipaA) {
-                vencedor = "Equipa B"
+                vencedor = "$nomeEquipaB"
             } else {
                 vencedor = "Empate"
             }
+            salvarDetalhesDoJogo(nomeEquipaA, nomeEquipaB, pontosEquipaA, pontosEquipaB, vencedor)
         }
     }
 
@@ -103,5 +117,29 @@ class Counter : AppCompatActivity() {
         for (imagemCarta in imagensCarta) {
             imagemCarta.isEnabled = true
         }
+    }
+
+    private fun salvarDetalhesDoJogo(
+        nomeEquipaA: String,
+        nomeEquipaB: String,
+        pontosEquipaA: Int,
+        pontosEquipaB: Int,
+        vencedor: String
+    ) {
+        val novoJogoRef = ref.push()
+        val jogo = HashMap<String, Any>()
+        jogo["nomeEquipaA"] = nomeEquipaA
+        jogo["nomeEquipaB"] = nomeEquipaB
+        jogo["pontosEquipaA"] = pontosEquipaA
+        jogo["pontosEquipaB"] = pontosEquipaB
+        jogo["vencedor"] = vencedor
+
+        novoJogoRef.setValue(jogo)
+            .addOnSuccessListener {
+                Log.d("TAG", "Dados inseridos com sucesso")
+            }
+            .addOnFailureListener { e ->
+                Log.d("TAG", "Erro ao inserir os dados: ${e.message}")
+            }
     }
 }

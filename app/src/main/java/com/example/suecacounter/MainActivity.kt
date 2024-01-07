@@ -11,8 +11,8 @@ import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var equipeA: String
-    private lateinit var equipeB: String
+    private lateinit var equipaA: String
+    private lateinit var equipaB: String
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         val startButton: Button = findViewById(R.id.startButton)
         val logoutButton: Button = findViewById(R.id.logoutButton)
+        val historyButton: Button = findViewById(R.id.historyButton)
 
         startButton.setOnClickListener {
             showCustomDialog()
@@ -38,6 +39,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        historyButton.setOnClickListener {
+            val intent = Intent(this, History::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun showCustomDialog() {
@@ -47,13 +53,13 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton("OK") { dialog, _ ->
                 val editTextEquipeA: EditText = dialogView.findViewById(R.id.editTextEquipaA)
                 val editTextEquipeB: EditText = dialogView.findViewById(R.id.editTextEquipaB)
-                equipeA = editTextEquipeA.text.toString()
-                equipeB = editTextEquipeB.text.toString()
+                equipaA = editTextEquipeA.text.toString()
+                equipaB = editTextEquipeB.text.toString()
 
                 // Iniciar a CounterActivity passando os nomes das equipas
                 val intent = Intent(this, Counter::class.java)
-                intent.putExtra("nomeEquipeA", equipeA)
-                intent.putExtra("nomeEquipeB", equipeB)
+                intent.putExtra("nomeEquipaA", equipaA)
+                intent.putExtra("nomeEquipaB", equipaB)
                 startActivity(intent)
 
                 dialog.dismiss()

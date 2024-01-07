@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- item_jogo.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewEquipaA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome equipa A"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewEquipaB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome equipa B"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewVencedor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vencedor: -"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- Adicione mais views conforme necessário para exibir outros detalhes do jogo -->
+</LinearLayout>
