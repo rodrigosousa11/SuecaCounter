@@ -107,6 +107,14 @@ class Counter : AppCompatActivity() {
                 vencedor = "Empate"
             }
             salvarDetalhesDoJogo(nomeEquipaA, nomeEquipaB, pontosEquipaA, pontosEquipaB, vencedor)
+
+            // Crie um Intent para iniciar a nova atividade (Quem_ganhou)
+            val intent = Intent(this, Ganhou::class.java)
+
+            // Adicione o valor do vencedor como um extra no Intent
+            intent.putExtra("vencedor", vencedor)
+
+            startActivity(intent)
         }
     }
 

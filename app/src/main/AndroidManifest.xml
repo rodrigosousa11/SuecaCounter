@@ -13,6 +13,12 @@
         android:theme="@style/Theme.SuecaCounter"
         tools:targetApi="31">
         <activity
+            android:name=".Ganhou"
+            android:exported="false" />
+        <activity
+            android:name=".Quem_ganhou"
+            android:exported="false" />
+        <activity
             android:name=".SignUp"
             android:exported="false" />
         <activity
@@ -32,8 +38,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>
