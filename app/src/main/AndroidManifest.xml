@@ -16,9 +16,6 @@
             android:name=".Ganhou"
             android:exported="false" />
         <activity
-            android:name=".Quem_ganhou"
-            android:exported="false" />
-        <activity
             android:name=".SignUp"
             android:exported="false" />
         <activity

@@ -105,23 +105,36 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnEquipaA"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/cinza"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_margin="4dp"
             android:text="Equipa A" />
 
-        <Button
-            android:id="@+id/btnEquipaB"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/cinza"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_margin="4dp"
             android:text="Equipa B" />
     </LinearLayout>
-    <Button
-        android:id="@+id/btnTerminar"
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Terminar" />
+        android:background="@color/red"
+        android:text="Terminar"
+        android:layout_margin="4dp"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 </LinearLayout>

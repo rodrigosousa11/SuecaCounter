@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -47,9 +48,9 @@ class Counter : AppCompatActivity() {
 
         textViewEquipaA = findViewById(R.id.textViewEquipaA)
         textViewEquipaB = findViewById(R.id.textViewEquipaB)
-        btnEquipaA = findViewById(R.id.btnEquipaA)
-        btnEquipaB = findViewById(R.id.btnEquipaB)
-        btnTerminar = findViewById(R.id.btnTerminar)
+        btnEquipaA = findViewById(R.id.button3)
+        btnEquipaB = findViewById(R.id.button2)
+        btnTerminar = findViewById(R.id.button1)
 
         imagemAs = findViewById(R.id.imagemas)
         imagemBisca = findViewById(R.id.imagemBisca)
@@ -67,12 +68,39 @@ class Counter : AppCompatActivity() {
 
         val cartas = listOf(11, 10, 4, 3, 2)
 
+        val cartasNomes = listOf("As", "Bisca", "Rei", "Valete", "Dama")
+        val cartasContagem = mutableMapOf<String, Int>()
+
+// ...
+
         val imagensCarta = listOf(imagemAs, imagemBisca, imagemRei, imagemValete, imagemDama)
+        val cartasLimites = mutableMapOf<String, Int>()
+
         for ((index, imagemCarta) in imagensCarta.withIndex()) {
+            val nomeCarta = cartasNomes[index]
+            cartasContagem[nomeCarta] = 0
+            cartasLimites[nomeCarta] = 4 // Defina o limite inicial para 4
+
             imagemCarta.setOnClickListener {
                 if (cartasSelecionadas < maxCartasSelecionadas) {
-                    pontosJogadaAtual += cartas[index]
-                    cartasSelecionadas++
+                    if (cartasContagem[nomeCarta]!! < cartasLimites[nomeCarta]!!) {
+                        pontosJogadaAtual += cartas[index]
+                        cartasSelecionadas++
+
+                        // Atualiza a contagem da carta
+                        val contagemAtual = cartasContagem.getValue(nomeCarta)
+                        cartasContagem[nomeCarta] = contagemAtual + 1
+
+                        // Exibe um alerta indicando a seleção da carta e a contagem atual
+                        showToast("Você selecionou o $nomeCarta ${cartasContagem[nomeCarta]}x")
+                        Log.d("DEBUG", "cartasSelecionadas: $cartasSelecionadas")
+                    } else {
+                        // Exibe um alerta indicando que o limite de seleções para a carta foi atingido
+                        showToast("Não pode selecionar mais $nomeCarta")
+                    }
+                } else {
+                    // Exibe um alerta indicando que o limite total de seleções foi atingido
+                    showToast("Você atingiu o limite total de seleções")
                 }
 
                 if (cartasSelecionadas >= maxCartasSelecionadas) {
@@ -84,6 +112,9 @@ class Counter : AppCompatActivity() {
                 }
             }
         }
+
+// ...
+
 
         btnEquipaA.setOnClickListener {
             pontosEquipaA += pontosJogadaAtual
@@ -116,6 +147,10 @@ class Counter : AppCompatActivity() {
 
             startActivity(intent)
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun resetarJogada() {
