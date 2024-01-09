@@ -30,5 +30,13 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/textViewData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Data: "
+        android:textStyle="bold" />
+
     <!-- Adicione mais views conforme necessário para exibir outros detalhes do jogo -->
 </LinearLayout>

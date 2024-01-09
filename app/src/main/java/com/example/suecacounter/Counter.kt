@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ServerValue
 
 class Counter : AppCompatActivity() {
     private lateinit var btnEquipaA: Button
@@ -79,15 +80,13 @@ class Counter : AppCompatActivity() {
         val cartasNomes = listOf("As", "Bisca", "Rei", "Valete", "Dama")
         val cartasContagem = mutableMapOf<String, Int>()
 
-// ...
-
         val imagensCarta = listOf(imagemAs, imagemBisca, imagemRei, imagemValete, imagemDama)
         val cartasLimites = mutableMapOf<String, Int>()
 
         for ((index, imagemCarta) in imagensCarta.withIndex()) {
             val nomeCarta = cartasNomes[index]
             cartasContagem[nomeCarta] = 0
-            cartasLimites[nomeCarta] = 4 // Defina o limite inicial para 4
+            cartasLimites[nomeCarta] = 4
 
             imagemCarta.setOnClickListener {
                 if (cartasSelecionadas < maxCartasSelecionadas) {
@@ -95,19 +94,15 @@ class Counter : AppCompatActivity() {
                         pontosJogadaAtual += cartas[index]
                         cartasSelecionadas++
 
-                        // Atualiza a contagem da carta
                         val contagemAtual = cartasContagem.getValue(nomeCarta)
                         cartasContagem[nomeCarta] = contagemAtual + 1
 
-                        // Exibe um alerta indicando a seleção da carta e a contagem atual
                         showToast("Você selecionou o $nomeCarta ${cartasContagem[nomeCarta]}x")
                         Log.d("DEBUG", "cartasSelecionadas: $cartasSelecionadas")
                     } else {
-                        // Exibe um alerta indicando que o limite de seleções para a carta foi atingido
                         showToast("Não pode selecionar mais $nomeCarta")
                     }
                 } else {
-                    // Exibe um alerta indicando que o limite total de seleções foi atingido
                     showToast("Você atingiu o limite total de seleções")
                 }
 
@@ -120,9 +115,6 @@ class Counter : AppCompatActivity() {
                 }
             }
         }
-
-// ...
-
 
         btnEquipaA.setOnClickListener {
             pontosEquipaA += pontosJogadaAtual
@@ -147,10 +139,8 @@ class Counter : AppCompatActivity() {
             }
             salvarDetalhesDoJogo(nomeEquipaA, nomeEquipaB, pontosEquipaA, pontosEquipaB, vencedor)
 
-            // Crie um Intent para iniciar a nova atividade (Quem_ganhou)
             val intent = Intent(this, Ganhou::class.java)
 
-            // Adicione o valor do vencedor como um extra no Intent
             intent.putExtra("vencedor", vencedor)
 
             startActivity(intent)
@@ -184,6 +174,7 @@ class Counter : AppCompatActivity() {
         jogo["pontosEquipaA"] = pontosEquipaA
         jogo["pontosEquipaB"] = pontosEquipaB
         jogo["vencedor"] = vencedor
+        jogo["data"] = ServerValue.TIMESTAMP
 
         novoJogoRef.setValue(jogo)
             .addOnSuccessListener {
