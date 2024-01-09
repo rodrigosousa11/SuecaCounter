@@ -30,11 +30,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         logoutButton.setOnClickListener {
-            // Chama a função para fazer logout
             firebaseAuth.signOut()
             Toast.makeText(this, "Logout bem-sucedido", Toast.LENGTH_SHORT).show()
 
-            // Redireciona o usuário de volta para a tela de login ou signup
             val intent = Intent(this, SignIn::class.java)
             startActivity(intent)
             finish()
@@ -56,7 +54,6 @@ class MainActivity : AppCompatActivity() {
                 equipaA = editTextEquipeA.text.toString()
                 equipaB = editTextEquipeB.text.toString()
 
-                // Iniciar a CounterActivity passando os nomes das equipas
                 val intent = Intent(this, Counter::class.java)
                 intent.putExtra("nomeEquipaA", equipaA)
                 intent.putExtra("nomeEquipaB", equipaB)
