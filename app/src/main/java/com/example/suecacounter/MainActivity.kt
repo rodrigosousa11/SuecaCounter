@@ -51,8 +51,9 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton("OK") { dialog, _ ->
                 val editTextEquipeA: EditText = dialogView.findViewById(R.id.editTextEquipaA)
                 val editTextEquipeB: EditText = dialogView.findViewById(R.id.editTextEquipaB)
-                equipaA = editTextEquipeA.text.toString()
-                equipaB = editTextEquipeB.text.toString()
+
+                equipaA = editTextEquipeA.text.toString().takeIf { it.isNotBlank() } ?: "Equipa A"
+                equipaB = editTextEquipeB.text.toString().takeIf { it.isNotBlank() } ?: "Equipa B"
 
                 val intent = Intent(this, Counter::class.java)
                 intent.putExtra("nomeEquipaA", equipaA)

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- item_jogo.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingBottom="16dp">
 
     <TextView
         android:id="@+id/textViewEquipaA"
@@ -36,7 +35,11 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="Data: "
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
 
-    <!-- Adicione mais views conforme necessário para exibir outros detalhes do jogo -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/divider" />
 </LinearLayout>

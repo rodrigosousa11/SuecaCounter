@@ -37,7 +37,6 @@ class Counter : AppCompatActivity() {
     private lateinit var ref: DatabaseReference
     private lateinit var userId: String
 
-    @SuppressLint("SetTextI18n", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_counter)
@@ -77,7 +76,7 @@ class Counter : AppCompatActivity() {
 
         val cartas = listOf(11, 10, 4, 3, 2)
 
-        val cartasNomes = listOf("As", "Bisca", "Rei", "Valete", "Dama")
+        val cartasNomes = listOf("Ás", "Bisca", "Rei", "Valete", "Dama")
         val cartasContagem = mutableMapOf<String, Int>()
 
         val imagensCarta = listOf(imagemAs, imagemBisca, imagemRei, imagemValete, imagemDama)
@@ -97,13 +96,13 @@ class Counter : AppCompatActivity() {
                         val contagemAtual = cartasContagem.getValue(nomeCarta)
                         cartasContagem[nomeCarta] = contagemAtual + 1
 
-                        showToast("Você selecionou o $nomeCarta ${cartasContagem[nomeCarta]}x")
+                        showToast("Selecionou a carta $nomeCarta ${cartasContagem[nomeCarta]}x.")
                         Log.d("DEBUG", "cartasSelecionadas: $cartasSelecionadas")
                     } else {
-                        showToast("Não pode selecionar mais $nomeCarta")
+                        showToast("Já foram jogadas todas as cartas $nomeCarta!")
                     }
                 } else {
-                    showToast("Você atingiu o limite total de seleções")
+                    showToast("Já foram jogadas todas as cartas!")
                 }
 
                 if (cartasSelecionadas >= maxCartasSelecionadas) {
