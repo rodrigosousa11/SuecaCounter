@@ -39,6 +39,7 @@ class History : AppCompatActivity() {
                     val jogo = gameSnapshot.getValue(Jogo::class.java)
                     jogo?.let { jogosList.add(it) }
                 }
+                jogosList.reverse()
                 adapter.updateData(jogosList)
             }
 

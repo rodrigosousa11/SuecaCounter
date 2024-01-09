@@ -11,8 +11,8 @@
 
         <ImageButton
             android:id="@+id/buttonBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:src="@drawable/voltaratras"
             android:background="?android:attr/selectableItemBackground"
             android:layout_margin="8dp"
@@ -24,7 +24,7 @@
             android:id="@+id/textViewEquipaA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="240dp"
+            android:layout_marginStart="265dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="Equipa A: 0"
@@ -36,7 +36,7 @@
             android:id="@+id/textViewEquipaB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="240dp"
+            android:layout_marginStart="265dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="Equipa B: 0"
