@@ -1,5 +1,6 @@
 package com.example.suecacounter
 
+import java.util.*
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,7 +38,9 @@ class History : AppCompatActivity() {
                 val jogosList = mutableListOf<Jogo>()
                 for (gameSnapshot in snapshot.children) {
                     val jogo = gameSnapshot.getValue(Jogo::class.java)
-                    jogo?.let { jogosList.add(it) }
+                    jogo?.let {
+                        jogosList.add(it)
+                    }
                 }
                 adapter.updateData(jogosList)
             }
