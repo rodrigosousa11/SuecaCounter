@@ -10,7 +10,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="red">#D00111</color>
     <color name="cinza">#4F4E4E</color>
-
+    <color name="fundo">#CCCCCC</color>
 
     <color name="yellow">#FFC801</color>
 </resources>
