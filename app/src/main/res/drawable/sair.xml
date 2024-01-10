@@ -1,4 +1,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="20dp" /> <!-- Ajuste o valor de "radius" conforme necessário -->
-    <solid android:color="@color/red" /> <!-- Define a cor de fundo do botão -->
+    <corners android:radius="15dp" /> <!-- Ajuste o valor de "radius" conforme necessário -->
+    <solid android:color="@color/red_main" /> <!-- Define a cor de fundo do botão -->
 </shape>

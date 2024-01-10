@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
@@ -21,9 +22,9 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        val startButton: Button = findViewById(R.id.startButton)
-        val logoutButton: Button = findViewById(R.id.logoutButton)
-        val historyButton: Button = findViewById(R.id.historyButton)
+        val startButton: LinearLayout = findViewById(R.id.startButton)
+        val logoutButton: LinearLayout = findViewById(R.id.logoutButton)
+        val historyButton: LinearLayout = findViewById(R.id.historyButton)
 
         startButton.setOnClickListener {
             showCustomDialog()
