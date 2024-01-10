@@ -5,15 +5,19 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.suecacounter.databinding.ActivityGanhouBinding
 
 class Ganhou : AppCompatActivity() {
+    private lateinit var binding: ActivityGanhouBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ganhou)
+        binding = ActivityGanhouBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val vencedor = intent.getStringExtra("vencedor")
 
-        val mensagemTextView = findViewById<TextView>(R.id.textViewEquipaA)
+        val mensagemTextView = binding.textViewEquipaA
 
         val mensagem: String = when (vencedor) {
             null -> "Vencedor indefinido"
@@ -27,7 +31,7 @@ class Ganhou : AppCompatActivity() {
 
         mensagemTextView.text = mensagem
 
-        val btnVoltarAtras = findViewById<Button>(R.id.button)
+        val btnVoltarAtras = binding.button
 
         btnVoltarAtras.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

@@ -1,25 +1,26 @@
 package com.example.suecacounter
 
-import java.text.SimpleDateFormat
-import java.util.*
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.suecacounter.databinding.ItemJogoBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class JogoAdapter(private var listaJogos: List<Jogo> = ArrayList()) : RecyclerView.Adapter<JogoAdapter.JogoViewHolder>() {
 
-    inner class JogoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val equipeA: TextView = itemView.findViewById(R.id.textViewEquipaA)
-        val equipeB: TextView = itemView.findViewById(R.id.textViewEquipaB)
-        val vencedor: TextView = itemView.findViewById(R.id.textViewVencedor)
-        val data: TextView = itemView.findViewById(R.id.textViewData)
+    inner class JogoViewHolder(private val binding: ItemJogoBinding) : RecyclerView.ViewHolder(binding.root) {
+        val equipeA: TextView = binding.textViewEquipaA
+        val equipeB: TextView = binding.textViewEquipaB
+        val vencedor: TextView = binding.textViewVencedor
+        val data: TextView = binding.textViewData
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JogoViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_jogo, parent, false)
-        return JogoViewHolder(itemView)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemJogoBinding.inflate(inflater, parent, false)
+        return JogoViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: JogoViewHolder, position: Int) {
@@ -41,7 +42,6 @@ class JogoAdapter(private var listaJogos: List<Jogo> = ArrayList()) : RecyclerVi
         holder.data.text = "Data: $dataFormatada"
     }
 
-
     override fun getItemCount(): Int {
         return listaJogos.size
     }
@@ -51,4 +51,3 @@ class JogoAdapter(private var listaJogos: List<Jogo> = ArrayList()) : RecyclerVi
         notifyDataSetChanged()
     }
 }
-

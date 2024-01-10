@@ -4,27 +4,29 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.suecacounter.databinding.ActivityMainBinding
+import com.example.suecacounter.databinding.DialogInputNamesBinding
 import com.google.firebase.auth.FirebaseAuth
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var equipaA: String
     private lateinit var equipaB: String
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        val startButton: LinearLayout = findViewById(R.id.startButton)
-        val logoutButton: LinearLayout = findViewById(R.id.logoutButton)
-        val historyButton: LinearLayout = findViewById(R.id.historyButton)
+        val startButton = binding.startButton
+        val logoutButton = binding.logoutButton
+        val historyButton = binding.historyButton
 
         startButton.setOnClickListener {
             showCustomDialog()
@@ -46,27 +48,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showCustomDialog() {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_input_names, null)
+        val dialogBinding = DialogInputNamesBinding.inflate(LayoutInflater.from(this))
         val builder = AlertDialog.Builder(this)
-        builder.setView(dialogView)
+        builder.setView(dialogBinding.root)
             .setPositiveButton("OK") { dialog, _ ->
-                val editTextEquipeA: EditText = dialogView.findViewById(R.id.editTextEquipaA)
-                val editTextEquipeB: EditText = dialogView.findViewById(R.id.editTextEquipaB)
+                equipaA = dialogBinding.editTextEquipaA.text.toString().takeIf { it.isNotBlank() } ?: "Equipa A"
+                equipaB = dialogBinding.editTextEquipaB.text.toString().takeIf { it.isNotBlank() } ?: "Equipa B"
 
-                equipaA = editTextEquipeA.text.toString().takeIf { it.isNotBlank() } ?: "Equipa A"
-                equipaB = editTextEquipeB.text.toString().takeIf { it.isNotBlank() } ?: "Equipa B"
-
-                val intent = Intent(this, Counter::class.java)
-                intent.putExtra("nomeEquipaA", equipaA)
-                intent.putExtra("nomeEquipaB", equipaB)
-                startActivity(intent)
-
-                dialog.dismiss()
+                if (equipaA.length > 22 || equipaB.length > 22) {
+                    Toast.makeText(this, "Por favor insira um nome com menos de 23 caracteres.", Toast.LENGTH_SHORT).show()
+                } else {
+                    val intent = Intent(this, Counter::class.java)
+                    intent.putExtra("nomeEquipaA", equipaA)
+                    intent.putExtra("nomeEquipaB", equipaB)
+                    startActivity(intent)
+                    dialog.dismiss()
+                }
             }
             .setNegativeButton("Cancelar") { dialog, _ ->
                 dialog.cancel()
             }
-        val dialog = builder.create()
-        dialog.show()
+        val alertDialog = builder.create()
+        alertDialog.show()
     }
 }

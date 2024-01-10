@@ -40,10 +40,10 @@ class SignUp : AppCompatActivity() {
                         }
                     }
                 } else {
-                    Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "As palavras-passe não correspondem!", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
 
             }
         }
