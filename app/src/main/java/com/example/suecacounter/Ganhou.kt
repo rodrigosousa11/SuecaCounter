@@ -18,7 +18,11 @@ class Ganhou : AppCompatActivity() {
         val mensagem: String = when (vencedor) {
             null -> "Vencedor indefinido"
             "Empate" -> "As equipas empataram!"
-            else -> "Equipa $vencedor ganhou!"
+            else -> if (vencedor.startsWith("Equipa")) {
+                "$vencedor ganhou!"
+            } else {
+                "Equipa $vencedor ganhou!"
+            }
         }
 
         mensagemTextView.text = mensagem
