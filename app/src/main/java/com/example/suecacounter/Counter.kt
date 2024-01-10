@@ -1,21 +1,22 @@
 package com.example.suecacounter
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.suecacounter.databinding.ActivityCounterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
 
 class Counter : AppCompatActivity() {
+    private lateinit var binding: ActivityCounterBinding
+
     private lateinit var btnEquipaA: Button
     private lateinit var btnEquipaB: Button
     private lateinit var btnTerminar: Button
@@ -39,9 +40,10 @@ class Counter : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_counter)
+        binding = ActivityCounterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val buttonBack = findViewById<ImageButton>(R.id.buttonBack)
+        val buttonBack = binding.buttonBack
 
         buttonBack.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -54,25 +56,30 @@ class Counter : AppCompatActivity() {
 
         ref = FirebaseDatabase.getInstance().reference.child("users").child(userId).child("jogos")
 
-        textViewEquipaA = findViewById(R.id.textViewEquipaA)
-        textViewEquipaB = findViewById(R.id.textViewEquipaB)
-        btnEquipaA = findViewById(R.id.button3)
-        btnEquipaB = findViewById(R.id.button2)
-        btnTerminar = findViewById(R.id.button1)
+        textViewEquipaA = binding.textViewEquipaA
+        textViewEquipaB = binding.textViewEquipaB
+        btnEquipaA = binding.buttonWinnerA
+        btnEquipaB = binding.buttonWinnerB
+        btnTerminar = binding.button1
 
-        imagemAs = findViewById(R.id.imagemas)
-        imagemBisca = findViewById(R.id.imagemBisca)
-        imagemRei = findViewById(R.id.imagemRei)
-        imagemValete = findViewById(R.id.imagemValete)
-        imagemDama = findViewById(R.id.imagemDama)
+        imagemAs = binding.imagemas
+        imagemBisca = binding.imagemBisca
+        imagemRei = binding.imagemRei
+        imagemValete = binding.imagemValete
+        imagemDama = binding.imagemDama
 
         val nomeEquipaA = intent.getStringExtra("nomeEquipaA") ?: ""
         val nomeEquipaB = intent.getStringExtra("nomeEquipaB") ?: ""
 
-        val textViewNomeEquipeA = findViewById<TextView>(R.id.textViewEquipaA)
-        val textViewNomeEquipeB = findViewById<TextView>(R.id.textViewEquipaB)
+        val textViewNomeEquipeA = binding.textViewEquipaA
+        val textViewNomeEquipeB = binding.textViewEquipaB
         textViewNomeEquipeA.text = "$nomeEquipaA: $pontosEquipaA"
         textViewNomeEquipeB.text = "$nomeEquipaB: $pontosEquipaB"
+
+        val btnEquipaA = binding.buttonWinnerA
+        val btnEquipaB = binding.buttonWinnerB
+        btnEquipaA.text = nomeEquipaA
+        btnEquipaB.text = nomeEquipaB
 
         val cartas = listOf(11, 10, 4, 3, 2)
 
