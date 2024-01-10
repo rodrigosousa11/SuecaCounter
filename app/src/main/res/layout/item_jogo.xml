@@ -10,12 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nome equipa A"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewEquipaB"
         android:layout_width="wrap_content"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:text="Nome equipa B"
         android:textSize="16sp"
@@ -26,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Vencedor: -"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -35,6 +38,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="Data: "
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"/>
 
