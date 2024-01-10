@@ -7,17 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".Ganhou">
 
+    <ImageView
+        android:id="@+id/arroz"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:src="@drawable/gameover"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewEquipaA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="center"/>
+
     <TextView
         android:id="@+id/textViewEquipaA"
         android:layout_width="251dp"
         android:layout_height="61dp"
         android:text="Vencedor"
         android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arroz"
         app:layout_constraintVertical_bias="0.5" />
 
     <androidx.appcompat.widget.AppCompatButton
